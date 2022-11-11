@@ -1,0 +1,40 @@
+table{
+    width: 90%;
+    border: solid 1px rgb(126, 170, 253);
+    margin: 0 5%;
+    text-align: center;
+    box-shadow: 5px 5px 5px darkgray;
+}
+thead{
+    background-color: #3399ff;
+    color: #fff;
+}
+tr{
+    height: 4%;
+    /* border-bottom: #000 solid 1px !important; */
+}
+th{
+    height: 4vw;
+    border: rgb(126, 170, 253) solid 0.5px;
+}
+td{
+    height: 3vw;
+    border: rgb(126, 170, 253) solid 1px;
+}
+/* .subjectContain{
+    border-radius: 10px;
+} */
+.ant-modal-content{
+    border-radius: 10px;
+}
+.ant-modal-header{
+    border-radius: 10px 10px 0 0;
+}
+.subjectModel{
+    position: absolute;
+    width: 11vw;
+    background-color: #3399ff;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px lightblue;
+}
