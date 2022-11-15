@@ -1,0 +1,13 @@
+.anticon{
+    cursor: pointer;
+}
+.note-content{
+    width: 500px;
+}
+.note-content p{
+    width: 72%;
+}
+.note-content .edit-icon{
+    width: 10%;
+    align-self: center;
+}
