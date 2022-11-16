@@ -4,7 +4,7 @@ import './index.css';
 import { Tabs,Button,Modal } from 'antd';
 import Item from './Item';
 import {
-  PlusOutlined
+  PlusOutlined,FireOutlined,WarningOutlined,PaperClipOutlined
 } from '@ant-design/icons';
 
 
@@ -64,15 +64,15 @@ export default function Project() {
     return (
       <>
       <div className='project-item'>
-        <h2>Low</h2>
+        <h2><PaperClipOutlined style={{color: "green"}}/>Low</h2>
         <Item data={arr} priority={1}/>
       </div>
       <div  className='project-item'>
-        <h2>Medium</h2>
+        <h2> <WarningOutlined style={{color: "orange"}}/> Medium</h2>
         <Item data={arr} priority={2}/>
       </div>
       <div  className='project-item'>
-        <h2>High</h2>
+        <h2><FireOutlined style={{color: "red"}}/> High</h2>
         <Item data={arr} priority={3}/>
       </div>
       </>

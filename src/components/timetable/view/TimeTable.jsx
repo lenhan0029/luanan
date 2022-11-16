@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getTimeTable } from '../../../api/TimeTable';
 import Data from './Data';
 import './style.css'
 
 export default function TimeTable() {
+    
+    // const [data,setData] = useState();
     // const check = () => {
     //     console.log("hi");
     //     var arr = [];
@@ -10,8 +13,11 @@ export default function TimeTable() {
     //         arr.push(<Data row={i}/>);
             
     //     }
-    //     return <>{arr}</>;
+    //     return arr;
     // }
+    // useEffect(() =>{
+    //     setData(check);
+    // },[])
   return (
     <div>
         
@@ -28,17 +34,17 @@ export default function TimeTable() {
                 </tr>
             </thead>
             <tbody>
-                <Data row={1}/>
-                <Data row={2}/>
-                <Data row={3}/>
-                <Data row={4}/>
-                <Data row={5}/>
-                <Data row={6}/>
-                <Data row={7}/>
-                <Data row={8}/>
-                <Data row={9}/>
-                <Data row={10}/>
-                {/* {check} */}
+                {/* <Data row={1} />
+                <Data row={2} />
+                <Data row={3} />
+                <Data row={4} />
+                <Data row={5} />
+                <Data row={6} />
+                <Data row={7} />
+                <Data row={8} />
+                <Data row={9} />
+                <Data row={10}/> */}
+                <Data />
             </tbody>
             <tfoot>
 

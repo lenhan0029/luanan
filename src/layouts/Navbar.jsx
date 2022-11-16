@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import {
@@ -9,9 +9,10 @@ import {
   CalendarOutlined,
   FormOutlined,
   CopyOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  ExclamationCircleOutlined
 } from '@ant-design/icons';
-import { Alert, Button, Layout, Menu } from 'antd';
+import { Alert, Button, Layout, Menu, Modal } from 'antd';
 import TimeTable from '../components/timetable/view/TimeTable';
 import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Project from '../components/project/Project';
@@ -20,9 +21,16 @@ import Document from '../components/document/Document';
 import Task from '../components/project/Task';
 
 const { Header, Sider, Content } = Layout;
+const { confirm } = Modal;
 
 export default function Navbar() {
   let navigate = useNavigate();
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+  if(token == null){
+    navigate('/login');
+  }
+  },[])
   const url = useParams();
   let location = useLocation();
   let word = JSON.stringify(url).split('"')[3];
@@ -63,6 +71,22 @@ export default function Navbar() {
     }
   }
   const nowItem = navItem();
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
+  const showConfirm = () => {
+    confirm({
+      title: 'Bạn có muốn đăng xuất không?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Bạn phải đăng nhập lại để sử dụng các chức năng ',
+      onOk() {
+        logout()
+      },
+      onCancel() {
+      },
+    });
+  };
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -101,7 +125,7 @@ export default function Navbar() {
               key: '5',
               icon: <LogoutOutlined />,
               label: 'Đăng xuất',
-              onClick: () => {alert("đăng xuất")}
+              onClick: () => {showConfirm()}
             },
           ]}
          />
@@ -122,6 +146,8 @@ export default function Navbar() {
             margin: '24px 16px',
             padding: 24,
             minHeight: 648,
+            maxHeight: 648,
+            overflowY: "scroll"
           }}
         >
           <Routes>
