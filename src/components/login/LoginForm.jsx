@@ -18,18 +18,14 @@ export default function Login() {
         // console.log(result.token);
         if(result.token != null){
           localStorage.setItem('token',result.token);
+          localStorage.setItem('userid',result.id);
           navigate('/home/thoikhoabieu');
+          window.location.reload(true);
         }else{
           message.error('Thông tin đăng nhập không chính xác');
         }
         
       };
-      // useEffect(() => {
-      //   const rs = () => {
-      //     axios.get('http://cosmetics-shop.azurewebsites.net/brand');
-      //   }
-      //   console.log(rs());
-      // })
       
       return (
         <Form
@@ -55,21 +51,10 @@ export default function Login() {
               placeholder="Mật khẩu"
             />
           </Form.Item>
-          {/* <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-    
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Form.Item> */}
-    
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Đăng nhập
             </Button>
-            {/* Or <a href="">register now!</a> */}
           </Form.Item>
         </Form>
       );

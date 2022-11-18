@@ -17,7 +17,7 @@ export default function Item({data,priority}) {
         arr.push(
           <SwiperSlide>
           <Card title={e.name} bordered={false} onClick={() => { navigate('/home/duan/'+ e.id)}}>
-            {e.name}
+            Từ {e.timeStart} đến {e.timeEnd}
           </Card>
         </SwiperSlide>
         )

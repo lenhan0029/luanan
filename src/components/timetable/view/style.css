@@ -8,6 +8,7 @@ table{
 thead{
     background-color: #3399ff;
     color: #fff;
+    box-shadow: 5px 5px 5px lightblue;
 }
 tr{
     height: 4%;
@@ -33,8 +34,9 @@ td{
 .subjectModel{
     position: absolute;
     width: 11vw;
-    background-color: #3399ff;
+    background-color: #08b119;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px lightblue;
+    box-shadow: 5px 5px 5px rgb(8, 133, 60);
+    overflow: hidden;
 }

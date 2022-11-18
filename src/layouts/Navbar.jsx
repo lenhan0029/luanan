@@ -73,7 +73,9 @@ export default function Navbar() {
   const nowItem = navItem();
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userid');
     navigate('/login');
+    
   }
   const showConfirm = () => {
     confirm({

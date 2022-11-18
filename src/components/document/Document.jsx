@@ -4,74 +4,50 @@ import { Space, Table, Tag } from 'antd';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Tên tài liệu',
     dataIndex: 'name',
     key: 'name',
+    
+  },
+  {
+    title: 'Mô tả',
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: 'Đường dẫn',
+    dataIndex: 'link',
+    key: 'link',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
+    title: 'Danh mục',
+    dataIndex: 'category',
+    key: 'category',
   },
 ];
 
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    name: 'Tôi thấy hoa vàng trên cỏ xanh',
+    link: 'https://thuvienpdf.com/xem-sach/toi-thay-hoa-vang-tren-co-xanh',
+    description: 'Tiểu thuyết hay đã được chuyển thể thành phim',
+    category: 'tiểu thuyết'
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    name: 'Tôi thấy hoa vàng trên cỏ xanh',
+    link: 'https://thuvienpdf.com/xem-sach/toi-thay-hoa-vang-tren-co-xanh',
+    description: 'Tiểu thuyết hay đã được chuyển thể thành phim',
+    category: 'tiểu thuyết'
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    name: 'Tôi thấy hoa vàng trên cỏ xanh',
+    link: 'https://thuvienpdf.com/xem-sach/toi-thay-hoa-vang-tren-co-xanh',
+    description: 'Tiểu thuyết hay đã được chuyển thể thành phim',
+    category: 'tiểu thuyết'
   },
 ];
 export default function Document() {

@@ -1,6 +1,6 @@
-.site-card-wrapper {
+.site-card-wrapper{
     padding: 10px;
-    background: #ececec;
+    background-color: rgb(199, 236, 248);
   }
   .card-container p {
     margin: 0;
@@ -49,3 +49,14 @@
     background: #141414;
     border-color: #141414;
   }
+.ant-card{
+  width: 17.5vw;
+  height: 8vw;
+  border: solid 1px rgb(69, 160, 246);
+  box-shadow: 3px 3px 5px lightblue;
+  border-radius: 5px;
+}
+.ant-card-body{
+  overflow: hidden !important;
+  padding: none !important;
+}
