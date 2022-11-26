@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'quanlyghichu'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F5CB3EEC660045C78B9A37CB5214D09B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9EE9CA1216AD45EB90E74551BA32C698 }}
           package: .
