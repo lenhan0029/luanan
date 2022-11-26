@@ -13,7 +13,7 @@ export default function Login() {
   
   return (
     <div>
-        <div style={{width: "50%", margin: "0% 35%", padding: "15% 0"}}> 
+        <div style={{width: "50%", margin: "0% 35%", padding: "16.5% 0"}}> 
             
             <LoginForm />
         </div>

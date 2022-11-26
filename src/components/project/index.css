@@ -52,7 +52,6 @@
 .ant-card{
   width: 17.5vw;
   height: 8vw;
-  border: solid 1px rgb(69, 160, 246);
   box-shadow: 3px 3px 5px lightblue;
   border-radius: 5px;
 }

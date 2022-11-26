@@ -7,7 +7,8 @@ import { DatePicker, Popover } from 'antd';
 import {
     PlusOutlined,DeleteOutlined,EditOutlined,ExclamationCircleOutlined
   } from '@ant-design/icons';
-import { createNote, deleteNote, getNote } from '../../api/NoteAPI';
+import { createNote, deleteNote, getNote, updateNote } from '../../api/NoteAPI';
+import TextArea from 'antd/lib/input/TextArea';
 
   const dateFormat = 'YYYY-MM-DD';
   const datetimeFormat = 'YYYY-MM-DD HH:mm';
@@ -121,11 +122,10 @@ export default function NoteDay() {
                 const result = await deleteNote(noteid);
                 if(result != 404){
                     
+                  setDate(d);
                     message.success("Xóa ghi chú thành công");
-                  setDate(d);
                 }else{
-                  message.error('Tạo ghi chú thất bại');
-                  setDate(d);
+                  message.error('Xóa ghi chú thất bại');
                 }
             }
             deleteNoteById(id);
@@ -142,8 +142,8 @@ export default function NoteDay() {
         const pushData = {
             title: values.title,
             location: values.location,
-            timeStart: values.timeStart[0].format('YYYY-MM-DDTHH:mm:ss') + "+07:00",
-            timeEnd: values.timeStart[1].format('YYYY-MM-DDTHH:mm:ss')+ "+07:00",
+            timeStart: values.timeStart[0].format('YYYY-MM-DDTHH:mm:ss') + "+00:00",
+            timeEnd: values.timeStart[1].format('YYYY-MM-DDTHH:mm:ss')+ "+00:00",
             description: values.description,
             id_account: userid
 
@@ -160,8 +160,26 @@ export default function NoteDay() {
         // console.log(pushData);
         
       };
-    const onFinish1 = (values) => {
-        console.log(values);
+    const onFinish1 = async (values) => {
+        setDate(null);
+        const pushData = {
+            title: values.title,
+            location: values.location,
+            timeStart: values.timeStart[0].format('YYYY-MM-DDTHH:mm:ss') + "+00:00",
+            timeEnd: values.timeStart[1].format('YYYY-MM-DDTHH:mm:ss')+ "+00:00",
+            description: values.description,
+            id_account: userid
+
+        }
+        const result = await updateNote(modalData.id,pushData);
+        console.log(result);
+        if(result != 404){
+            setIsModalOpen1(false);
+            message.success("Cập nhật ghi chú thành công");
+          setDate(values.timeStart[0].format('YYYY-MM-DD'));
+        }else{
+          message.error('Cập nhật ghi chú thất bại');
+        }
     }
     const onDateChange = (d, dateString) => {
         setDate(dateString);
@@ -205,7 +223,7 @@ export default function NoteDay() {
             <Form.Item label="Chi tiết"
             name="description"
             >
-            <Input  placeholder="Mô tả công việc"/>
+            <TextArea  placeholder="Mô tả công việc"/>
             </Form.Item>
             <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button" style={{marginLeft: "10vw"}}>
@@ -222,17 +240,18 @@ export default function NoteDay() {
     })
     return (
       <>
-        <div style={{marginBottom: 50,display: "flex",justifyContent: "right"}}>
-            <div style={{marginLeft: "50px"}}>
+        <div style={{margin: "0 5vw 5vw 0",display: "flex",justifyContent: "right"}}>
+            {/* <div style={{marginLeft: "50px"}}>
                 <Input type='text' placeholder='vị trí'/>
             </div>
             <div style={{marginLeft: "50px"}}>
                 <Input type='text' placeholder='tiêu đề'/>
-            </div>
-            <div style={{marginLeft: "50px"}}>
+            </div> */}
+            <div>Chọn ngày</div>
+            <div style={{marginLeft: "2vw"}}>
                 <DatePicker value={moment(date, dateFormat)} format={dateFormat} onChange={onDateChange}/>
             </div>
-            <div style={{marginLeft: "50px"}}>
+            <div style={{marginLeft: "5vw"}}>
             <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>
             Thêm
             </Button>
@@ -278,7 +297,7 @@ export default function NoteDay() {
                 <Form.Item label="Chi tiết"
                 name="description"
                 >
-                <Input  placeholder="Mô tả công việc"/>
+                <TextArea  placeholder="Mô tả công việc"/>
                 </Form.Item>
                 <Form.Item>
                 <Button type="primary" htmlType="submit" className="login-form-button" style={{marginLeft: "10vw"}}>

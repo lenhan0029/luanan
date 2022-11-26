@@ -5,9 +5,9 @@ import Navbar from './layouts/Navbar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/login.jpg'})`}}>
       <Routes>
-        <Route path='/login' element={<Login />}></Route>
+        <Route path='/' element={<Login />}></Route>
         <Route path='/home/*' element={<Navbar />}></Route>
       </Routes>
     </div>

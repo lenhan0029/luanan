@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import 'antd/dist/antd.css';
-import { Button, Modal,Badge,Empty, message, Form } from 'antd';
+import { Button, Modal,Badge,Empty, message, Form, Spin } from 'antd';
 import {
     FormOutlined,
-    CommentOutlined,LockOutlined, UserOutlined
+    CommentOutlined,LockOutlined, UserOutlined,LoadingOutlined
   } from '@ant-design/icons';
 import { Input } from 'antd';
 import { createNewTimeTable, editNoteofSubject, getTimeTable } from '../../../api/TimeTable';
 import userEvent from '@testing-library/user-event';
 
 const userid = localStorage.getItem('userid');
+const antIcon = <LoadingOutlined style={{ fontSize: 100,margin: "50px 0 0 35vw" }} spin />;
+const smallicon = <LoadingOutlined style={{ fontSize: 24}} spin />;
 export default function Data() {
 
     const [isLoading,setIsLoading] = useState(false);
     const [array, setArray] = useState([]);
-    const [result, setResult] = useState([]);
+    const [result, setResult] = useState([{}]);
     const [modalData,setModalData] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpen1, setIsModalOpen1] = useState(false);
     const [editModal,setEditModal] = useState();
     const [newNote, setNewNote] = useState({note: null});
+    const [skeraton,setSkeraton] = useState(<Spin indicator={antIcon} />);
+    const [isUpdate, setIsUpdate] = useState(false);
+    // update new timetable
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
 
     const showModal = (data) => {
         setModalData(data);
@@ -31,6 +37,7 @@ export default function Data() {
       };
     const handleOk = () => {
         setIsLoading(!isLoading);
+        setIsUpdate(true);
         
     };
 
@@ -45,6 +52,15 @@ export default function Data() {
     };
 
     const handleCancel1 = () => {
+        setIsModalOpen1(false);
+    };
+    //update new timetable
+    const showModal2 = () => {
+        setIsModalOpen2(true);
+        
+    };
+
+    const handleCancel2 = () => {
         setIsModalOpen1(false);
     };
     const onFinish = async (values) => {
@@ -67,6 +83,21 @@ export default function Data() {
         
       };
     useEffect(() => {
+        setTimeout(() => {
+            setSkeraton(<Empty
+                image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                imageStyle={{
+                  height: 60,
+                }}
+                description={
+                  <span>
+                    Thời khóa biểu chưa được cập nhật
+                  </span>
+                }
+              >
+                <Button type="primary" onClick={showModal1}>Cập nhât thời khóa biểu</Button>
+              </Empty>);
+          }, 2000);
         async function getData(){
             const result = await getTimeTable(userid); 
             result.forEach(element => {
@@ -93,7 +124,9 @@ export default function Data() {
                         break;
                 }
             });
-            // console.log(Array.isArray(result));
+            
+            result.splice(0,0,{});
+            console.log(result);
             setArray(result);
             return result;
         }
@@ -119,21 +152,20 @@ export default function Data() {
             for (let a = 1; a < 11; a++) {
             const arr = [];
             arr.push(<td>Tiết {a}</td>)
-            for (let i = 2; i < 8; i++){
+            for (let i = 1; i < 8; i++){
             array.forEach(element => {
                 if(element.day === i+1 && element.start === a){
-                    let length = element.number*43 + "px";
-                    let position = 125 + element.start*44 + "px";
-                    arr.push(<td key={element.id}>
-                                <div className='subjectContain' style={{position: 'absolute',top: position}}>
+                    let length = element.number*5.7 + "vh";
+                    arr.push(<td key={element.id} style={{}} >
+                                <div className='subjectContain' style={{position: 'relative',top: "-2.5vh", fontSize:"1.5vh"}}>
                                     <div className='subjectModel' style={{height: length}}> 
-                                        <div style={{float: "right",padding: "5px 8px 0 0"}}>{element.note == null ?<FormOutlined style={{}} onClick={() => {
+                                        <div style={{float: "right",padding: "1vh 1vw 0 0"}}>{element.note == null || element.note == "" ?<FormOutlined style={{}} onClick={() => {
                                             showModal(element);
                                         }}/> :
                                          <Badge count={1} size="small" onClick={() => {
                                             showModal(element);
                                          }}><CommentOutlined style={{color: "red"}} /></Badge>}</div>
-                                        <h4 style={{color: "white", paddingTop:"5px"}}>{element.name}</h4>
+                                        <h4 style={{color: "white", paddingTop:"2px"}}>{element.name}</h4>
                                         <h5>{element.room}</h5>
                                     </div>
                                     
@@ -161,13 +193,26 @@ export default function Data() {
         return (
             <Modal title="Thông tin môn học" open={isModalOpen} onOk={() => handleOk(newNote)} onCancel={handleCancel}
                                             >
-                                                <h3>Môn học: &ensp; &nbsp;  {modalData.name}</h3>
-                                                <p>Thời gian: &emsp; &nbsp;  Thứ {modalData.day} tiết {modalData.start}</p>
-                                                <p>Số lương tiết: &nbsp; {modalData.number}</p>
-                                                <p>Phòng: &emsp; &emsp; &nbsp; {modalData.room}</p>
-                                                <div style={{display: "flex"}}>
-                                                    <span style={{marginRight: "3vw"}}>Ghi chú</span>
-                                                    <TextArea
+                                                <table className='subject-info' style={{width: "100%",margin: 0}}>
+                                                    <tr>
+                                                        <td>Môn học</td>
+                                                        <td>{modalData.name}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thời gian</td>
+                                                        <td>Thứ {modalData.day} tiết {modalData.start}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Số lượng tiết</td>
+                                                        <td>{modalData.number}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phòng</td>
+                                                        <td>{modalData.room}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ghi chú</td>
+                                                        <td><TextArea
                                                         showCount
                                                         maxLength={250}
                                                         style={{ height: 80,width: "25vw" }}
@@ -176,8 +221,9 @@ export default function Data() {
                                                         placeholder="ghi chú..."
                                                         allowClear={true}
                                                         size={"large"}
-                                                    />
-                                                </div>
+                                                    /></td>
+                                                    </tr>
+                                                </table>
                                             </Modal>
         )
     }
@@ -186,27 +232,28 @@ export default function Data() {
             setEditModal(rs);
     },[modalData])
     useEffect(() => {
-        if(newNote.note != null){
+        if(newNote.note != null && isUpdate==true){
             async function editSubjectNote(){
             const rs = await editNoteofSubject(modalData.id,newNote);
             console.log(rs);
                 if(rs != 404){
                     setIsModalOpen(false);
                     setNewNote({note: null});
-                    message.success("Tạo ghi chú thành công");
+                    message.success("Cập nhật ghi chú thành công");
                     setIsLoading(!isLoading);
                 }else{
-                message.error('Tạo ghi chú thất bại');
+                message.error('Cập nhật ghi chú thất bại');
                 }
         }
         editSubjectNote();
         setEditModal();
+        setIsUpdate(false);
         }
     },[isLoading])
     return (
         <>
         { array.length !== 0 ? <>
-        <table id='timetable' key={'timetable'}>
+        <table className='timetable' key={'timetable'}>
             <thead>
                 <tr>
                     <th style={{width: "60px"}}></th>
@@ -235,22 +282,9 @@ export default function Data() {
             <Button type='primary'>Cập nhật thời khóa biểu</Button>
         </div>
         
-        {/* {modalData != null ?  : ""} */}
         {editModal}
         </> : <>
-        <Empty
-    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-    imageStyle={{
-      height: 60,
-    }}
-    description={
-      <span>
-        Thời khóa biểu chưa được cập nhật
-      </span>
-    }
-  >
-    <Button type="primary" onClick={showModal1}>Cập nhât thời khóa biểu</Button>
-  </Empty>
+        {skeraton}
   <Modal title="Thông tin tài khoản đào tạo" open={isModalOpen1} onCancel={handleCancel1} footer={false}>
 
   <Form
@@ -260,7 +294,7 @@ export default function Data() {
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
+            rules={[{ required: true, message: 'Vui lòng nhập mã giáo viên!' }]}
           >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Mã giáo viên" />
           </Form.Item>
@@ -276,7 +310,7 @@ export default function Data() {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Đăng nhập
+            <Spin indicator={smallicon} />Đăng nhập
             </Button>
           </Form.Item>
         </Form>

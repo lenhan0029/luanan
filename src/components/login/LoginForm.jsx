@@ -33,6 +33,7 @@ export default function Login() {
           className="login-form"
           initialValues={{ remember: true }}
           onFinish={onFinish}
+          style={{backgroundColor: "white",borderRadius: "5px"}}
         >
           <h1>Đăng nhập</h1>
           <Form.Item

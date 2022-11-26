@@ -1,9 +1,9 @@
-table{
-    width: 90%;
+.timetable{
+    width: 72vw;
     border: solid 1px rgb(126, 170, 253);
-    margin: 0 5%;
+    margin: 0 4vw;
     text-align: center;
-    box-shadow: 5px 5px 5px darkgray;
+    box-shadow: 1vw 1vh 5px darkgray;
 }
 thead{
     background-color: #3399ff;
@@ -11,20 +11,22 @@ thead{
     box-shadow: 5px 5px 5px lightblue;
 }
 tr{
-    height: 4%;
+    height: 4vh;
+    width: 72vw;
     /* border-bottom: #000 solid 1px !important; */
 }
 th{
-    height: 4vw;
+    height: 4vh;
     border: rgb(126, 170, 253) solid 0.5px;
 }
 td{
-    height: 3vw;
+    height: 6vh;
+    width: 9vw;
     border: rgb(126, 170, 253) solid 1px;
 }
-/* .subjectContain{
-    border-radius: 10px;
-} */
+.subjectContain{
+    width: 10vw;
+}
 .ant-modal-content{
     border-radius: 10px;
 }
@@ -33,10 +35,24 @@ td{
 }
 .subjectModel{
     position: absolute;
-    width: 11vw;
+    width: 10vw;
     background-color: #08b119;
     color: #fff;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgb(8, 133, 60);
     overflow: hidden;
+}
+.subject-info{
+    box-shadow: none;
+    text-align: left;
+    border: none;
+}
+.subject-info tr{
+    border: none;
+}
+.subject-info td{
+    border: none;
+}
+.subject-info tr td:first-child{
+    width: 30%;
 }

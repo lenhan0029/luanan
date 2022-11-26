@@ -1,0 +1,14 @@
+.cate-btn{
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.cate-btn:first-child{
+    background-color: rgb(16, 209, 16);
+    color: aliceblue;
+    margin-right: 3px;
+}
+.cate-btn:last-child{
+    background-color: rgb(226, 95, 1);
+    color: aliceblue;
+}

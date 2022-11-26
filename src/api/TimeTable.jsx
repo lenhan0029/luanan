@@ -30,3 +30,12 @@ export const getTimeTable = async (id_account) => {
     
     return 404;
   };
+  export const updateTimeTable = async (data) => {
+    const url = '/timetable/update';
+    const response = await axiosClient.post(url,data);
+    if(response.data == 200){
+        // console.log(typeof(response.data));
+        return response.data;
+    }
+    return 404;
+  };

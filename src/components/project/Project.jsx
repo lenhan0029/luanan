@@ -7,34 +7,8 @@ import {
   PlusOutlined,FireOutlined,WarningOutlined,PaperClipOutlined
 } from '@ant-design/icons';
 import { createProject, getProject } from '../../api/ProjectAPI';
+import TextArea from 'antd/lib/input/TextArea';
 
-
-// const data = [{id: 1, name: "quản lý ghi chú", priority: 1, status: 3},
-// {id: 2, name: "quản lý ghi chú 1", priority: 2, status: 1},
-// {id: 3, name: "quản lý ghi chú 2", priority: 3, status: 2},
-// {id: 4, name: "quản lý ghi chú 3", priority: 1, status: 3},
-// {id: 5, name: "quản lý ghi chú 4", priority: 2, status: 1},
-// {id: 6, name: "quản lý ghi chú 5", priority: 3, status: 2},
-// {id: 7, name: "quản lý ghi chú 6", priority: 1, status: 3},
-// {id: 8, name: "quản lý ghi chú 7", priority: 2, status: 1},
-// {id: 9, name: "quản lý ghi chú 8", priority: 2, status: 1},
-// {id: 12, name: "quản lý ghi chú 11", priority: 3, status: 1},
-// {id: 13, name: "quản lý ghi chú 21", priority: 1, status: 2},
-// {id: 14, name: "quản lý ghi chú 31", priority: 2, status: 3},
-// {id: 15, name: "quản lý ghi chú 41", priority: 3, status: 1},
-// {id: 16, name: "quản lý ghi chú 51", priority: 2, status: 2},
-// {id: 17, name: "quản lý ghi chú 61", priority: 2, status: 3},
-// {id: 18, name: "quản lý ghi chú 71", priority: 3, status: 1},
-// {id: 19, name: "quản lý ghi chú 81", priority: 1, status: 1},
-// {id: 22, name: "quản lý ghi chú 11", priority: 2, status: 2},
-// {id: 23, name: "quản lý ghi chú 12", priority: 3, status: 3},
-// {id: 24, name: "quản lý ghi chú 13", priority: 1, status: 3},
-// {id: 25, name: "quản lý ghi chú 14", priority: 2, status: 1},
-// {id: 26, name: "quản lý ghi chú 15", priority: 3, status: 3},
-// {id: 27, name: "quản lý ghi chú 16", priority: 1, status: 2},
-// {id: 28, name: "quản lý ghi chú 17", priority: 2, status: 3},
-// {id: 29, name: "quản lý ghi chú 18", priority: 2, status: 2},
-// ]
 const userid = localStorage.getItem('userid');
 const datetimeFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
@@ -171,7 +145,6 @@ export default function Project() {
           Thêm
         </Button>
       </div>
-      {/* ADD modal */}
       <Modal title="Thông tin dự án" open={open} onCancel={handleCancel} onOk={handleOk} footer={false}>
 
             <Form
@@ -219,7 +192,7 @@ export default function Project() {
                 <Form.Item label="Chi tiết"
                 name="description"
                 >
-                <Input  placeholder="Mô tả dự án"/>
+                <TextArea  placeholder="Mô tả dự án"/>
                 </Form.Item>
                 <Form.Item>
                 <Button type="primary" htmlType="submit" className="login-form-button" style={{marginLeft: "10vw"}}>
